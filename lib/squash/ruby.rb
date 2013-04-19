@@ -491,7 +491,7 @@ module Squash
       else
         filtered       = value_filter(instance)
         yaml           = begin filtered.to_yaml; rescue Exception; nil end
-        json           = begin filtered.to_json; rescue Exception; nil end
+        #json           = begin filtered.to_json; rescue Exception; nil end
         inspect_result = begin filtered.inspect; rescue Exception => e; "[#{e.class}: #{e} raised when calling #inspect]" end
         to_s_result    = begin filtered.to_s; rescue Exception => e; "[#{e.class}: #{e} raised when calling #to_s]" end
 
@@ -500,7 +500,7 @@ module Squash
             'class_name' => filtered.class.to_s,
             'inspect'    => inspect_result,
             'yaml'       => yaml,
-            'json'       => json,
+            #'json'       => json,
             'to_s'       => to_s_result
         }
       end

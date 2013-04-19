@@ -161,7 +161,7 @@ describe Squash::Ruby do
                                                           "inspect"    => "/Hello, world!/",
                                                           "yaml"       => yaml,
                                                           "class_name" => "Regexp",
-                                                          "json"       => "\"(?-mix:Hello, world!)\"",
+                                                          #"json"       => "\"(?-mix:Hello, world!)\"",
                                                           "to_s"       => "(?-mix:Hello, world!)")
       end
 
@@ -178,20 +178,20 @@ describe Squash::Ruby do
         yaml = (RUBY_VERSION < '1.9.0') ? "--- \nfoo: bar\n" : "---\nfoo: bar\n"
         Squash::Ruby.valueify("hello" => "world").should eql({
             "inspect"=>"{\"foo\"=>\"bar\"}",
-            "json"=>"{\"foo\":\"bar\"}",
+            #"json"=>"{\"foo\":\"bar\"}",
             "yaml"=>yaml,
             "language"=>"ruby",
             "to_s"=>tos,
             "class_name"=>"Hash"})
       end
 
-      it "should gracefully recover from exceptions raised when calling #to_json" do
-        obj = Object.new
-        class << obj
-          def to_json() raise ArgumentError, "oops!"; end
-        end
-        Squash::Ruby.valueify(obj)['to_json'].should be_nil
-      end
+      #it "should gracefully recover from exceptions raised when calling #to_json" do
+      #  obj = Object.new
+      #  class << obj
+      #    def to_json() raise ArgumentError, "oops!"; end
+      #  end
+      #  Squash::Ruby.valueify(obj)['to_json'].should be_nil
+      #end
 
       it "should gracefully recover from exceptions raised when calling #to_yaml" do
         obj = Object.new
